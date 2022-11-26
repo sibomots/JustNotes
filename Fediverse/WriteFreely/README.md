@@ -1,10 +1,7 @@
 # Simple Setup for WriteFreely
 
-
 **GOAL:  Run WriteFreely as a separate instance using Nginx between
 the WriteFreely service and your Nginx virtual server.**
-
-
 
 The documentation for the package is fairly tight and complete, so
 I don't have a lot to add.  Here are some the gaps that might be
@@ -114,6 +111,10 @@ The next step in the WF generic instructions was to generate keys.
 
 Do that.
 
+```
+$ writefreely keys generate
+```
+
 Now you have a WF instance that is **ready, but not running**.
 
 The rest of the instructions in their setup-guide (Link at the top)
@@ -123,13 +124,33 @@ is pretty clear.  They offer two suggestions that I echo.
 1.  Use the *Behind a Reverse Proxy* steps/template they provide.  Wherever you need to change something, they actually put it in **bold** for you.  Namely, the **domain** and the **port** of the proxy.
 2.  Setup the `systemd` config per your flavor of OS.  Because, honestly, you just want to be able to start it it as `systemctl start writefreely`
 
+## certbot
+
+One more thing.  After this you'll need to establish the `https` flavor
+of the server hosted by `nginx`.  
+
+```
+# certbot --nginx -d wf.example.com
+```
+
+(not `-d example.com`)
+
+Let `certbot` do configure it for redirect.  Now your WF instance
+is prim and proper.
+
+# Test
+
 Once you've started it (`systemctl start writefreely`) you can now
 hit the site via browser and should see the WF beauty before your eyes.
 
 Problems, try their web page for installation.  It's fairly complete.
 
-I'm no expert in WF but it seems straight-forward.
-
-
+I'm no expert in WF but it seems straight-forward.  Questions, ping 
+me in case I can help.  But, I have no knowledge of how the software
+was developed.  I don't do `Go` or any scripting languages (except
+`bash` and `perl`).  I'm just an embedded `C` and `C++` programmer 
+for the most part making real hardware do real things in the vacuum 
+of space.  I don't (anymore) write
+software that runs within an operating system either.  Bare metal, baby.
 
 
